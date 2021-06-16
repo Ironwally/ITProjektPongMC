@@ -9,6 +9,16 @@ public class Objekt {
     protected int speed = 0;
     protected int[] direc;
     protected boolean playercontrolled;
+    protected int radius = 30;
+
+    public int getRadius() {
+        return radius;
+    }
+
+    public void setRadius(int radius) {
+        this.radius = radius;
+    }
+
 
     public int[] getDirec () {
         return direc;

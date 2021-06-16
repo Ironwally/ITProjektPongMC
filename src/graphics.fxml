@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.shape.*?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <center>
-      <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: black;" BorderPane.alignment="CENTER">
+      <Pane prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-color: black;" BorderPane.alignment="CENTER">
          <children>
-            <Circle fx:id="ball1" fill="WHITE" layoutX="955.0" layoutY="538.0" radius="30.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" />
-            <Rectangle fx:id="sliderRight" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="370.0" layoutX="1856.0" layoutY="14.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" width="50.0" />
-            <Rectangle fx:id="sliderLeft" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="370.0" layoutX="14.0" layoutY="14.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" width="50.0" />
+            <Circle fx:id="graphicball1" fill="WHITE" layoutX="900.0" layoutY="538.0" radius="30.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" />
+            <Rectangle fx:id="graphicSliderRight" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="370.0" layoutX="1856.0" layoutY="14.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" width="50.0" />
+            <Rectangle fx:id="graphicSliderLeft" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="370.0" layoutX="14.0" layoutY="14.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" width="50.0" />
+            <DialogPane layoutX="750.0" layoutY="219.0" />
          </children>
       </Pane>
    </center>
