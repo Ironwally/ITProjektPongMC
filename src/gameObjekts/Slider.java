@@ -1,6 +1,6 @@
 package gameObjekts;
 
-import java.awt.*;
+import javafx.scene.shape.*;
 
 public class Slider extends Objekt{
 

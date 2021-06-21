@@ -1,9 +1,23 @@
+import javafx.animation.AnimationTimer;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 public class Steuerung extends Application {
+
+    //Main Klasse
+    PingPongMain ppMain = new PingPongMain();
+
+    //Main Timeline
+    private Timeline timeline;
+    private AnimationTimer timer;
+
+    //Variable um echte Frame zu speichern
+    private Integer i=0;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -16,10 +30,32 @@ public class Steuerung extends Application {
         primaryStage.setResizable(false);
         primaryStage.setFullScreen(true);
         primaryStage.show();
+
+        //Timeline zum bewegen der Objekte
+
+        timeline = new Timeline(new KeyFrame(Duration.millis(10), e ->run(ppMain)));
+        timeline.setCycleCount(Timeline.INDEFINITE);
+
+      /*//Actions für spezifische Frames
+        timer = new AnimationTimer() {
+            @Override
+            public void handle (long now) {
+                i++;
+            }
+        };
+      */
+
+   
+
+
     }
 
+    private void run(PingPongMain ppMain) {
+        ppMain.naechsterGametick();
+    }
 
     public static void main(String[] args) {
         launch(args);
     }
+
 }

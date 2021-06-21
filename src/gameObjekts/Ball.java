@@ -2,6 +2,8 @@ package gameObjekts;
 
 import gameObjekts.Objekt;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.*;
+
 
 public class Ball extends Objekt {
 

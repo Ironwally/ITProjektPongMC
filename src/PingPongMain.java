@@ -1,17 +1,23 @@
 import gameObjekts.Ball;
 import gameObjekts.Objekt;
 import gameObjekts.Slider;
+import javafx.animation.PathTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
+import javafx.util.Duration;
 
-import java.awt.*;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
 public class PingPongMain implements Initializable {
+
 
     //Definitionen
     int punkteL = 0;
@@ -20,7 +26,7 @@ public class PingPongMain implements Initializable {
     int[] newPos = new int[2];
 
     double[] objektRand = new double[8];
-    double[] objektRandGenau = new double[2];
+
 
 
     //Grafische Oberfläche inits
@@ -29,10 +35,12 @@ public class PingPongMain implements Initializable {
     @FXML
     private Rectangle graphicSliderLeft;
     @FXML
-    private Circle graphicBall1;
+    private Circle graphicball1;
+    @FXML
+    private BorderPane bPane;
 
     //gameObjekts.Objekt inits
-    Ball ball1 = new Ball(graphicBall1);                    //Objekt Ball mit seiner Grafik erstellen
+    Ball ball1 = new Ball(graphicball1);                    //Objekt Ball mit seiner Grafik erstellen
     Slider sliderRight = new Slider(graphicSliderRight);    //Objekt Slider rechts mit seiner Grafik erstellen
     Slider sliderLeft = new Slider(graphicSliderLeft);      //Objekt Slider links mit seiner Grafik erstellen
 
@@ -43,27 +51,62 @@ public class PingPongMain implements Initializable {
 
     //Methoden
 
+    //movement updaten
+    @FXML
+    void keyPressed(KeyEvent event) {
+        if(event.getCode() == KeyCode.W) {
+            System.out.println("W");
+        }
+        if(event.getCode() == KeyCode.S) {
+            System.out.println("S");
+        }
+    }
+
+
     public void updateGrafik() {                            //Updatet die GUI
+
+        for (Slider slider : sliderListe) {
+
+            slider.getGraphic().setLayoutX(slider.getPos()[0]);
+            slider.getGraphic().setLayoutY(slider.getPos()[1]);
+        }
+
+        for (Ball ball : ballListe) {
+
+            ball.getGraphic().setLayoutX(ball.getPos()[0]);
+            ball.getGraphic().setLayoutY(ball.getPos()[1]);
+        }
 
     }
 
     public void naechsterGametick() {                       //Einmal pro Gametick aufgerufen -> Bestimmt Spielgeschwindigkeit
 
-        testHitObjekt(ball1);
+        moveObjekts();
+        updateGrafik();                                     //Nach dem Parameter geändert wurden, werden die Positionen der grafischen Objekte geupdatet
 
-        updateGrafik();                                     //Nach dem Parameter geändert wurden, werden die Positionen der Grafischen Positionen geupdatet
     }
-    public void moveBalls() {                               //Alle Bälle Position verändern
+    public void moveObjekts() {                                                                                         //Alle Objekte Position verändern
 
-        for (Ball ball : ballListe) {
+        for (Slider slider : sliderListe) {                                                                             //Slider bewegen
+
+            int[] newPos = new int[2];
+            newPos[0] = slider.getPos()[0] + slider.getDirec()[0] * slider.getSpeed();
+            newPos[1] = slider.getPos()[1] + slider.getDirec()[1] * slider.getSpeed();
+            slider.setPos(newPos);
+
+        }
+
+        for (Ball ball : ballListe) {                                                                                   //Bälle bewegen
+
+            testHitObjekt(ball);
 
             int[] newPos = new int[2];
             newPos[0] = ball.getPos()[0] + ball.getDirec()[0] * ball.getSpeed();
             newPos[1] = ball.getPos()[1] + ball.getDirec()[1] * ball.getSpeed();
-
             ball.setPos(newPos);
-            testHitObjekt(ball);
         }
+                                                                                                                        //Kategorien sind absichtlich getrennt, um die Übersichtlichkeit zu verbessern
+
     }
 
     public void resetBall(Ball ball) {
@@ -73,6 +116,8 @@ public class PingPongMain implements Initializable {
     }
 
     public void testHitObjekt(Ball testBall) {
+
+        double[] objektRandGenau = new double[2];
 
 
         objektRand[0] = testBall.getPos()[0] - testBall.getRadius(); // Ball Aufschlagpunkte auf der X-Koordinate, links
@@ -120,6 +165,7 @@ public class PingPongMain implements Initializable {
 
 
 
+    //Wird nach start der Oberfläche aufgerufen
 
     @Override
     public void initialize (URL location, ResourceBundle resources) {
@@ -135,5 +181,6 @@ public class PingPongMain implements Initializable {
         objektListe.addAll(ballListe);
         objektListe.addAll(sliderListe);
 
+      //  bPane.setOnKeyPressed(e -> sliderLeft.getGraphic().setLayoutX(sliderLeft.getGraphic().getLayoutX()+1));
     }
 }

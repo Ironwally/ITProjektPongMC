@@ -1,7 +1,7 @@
 package gameObjekts;
 
 import java.util.Vector;
-
+import javafx.scene.shape.*;
 
 public class Objekt {
 
