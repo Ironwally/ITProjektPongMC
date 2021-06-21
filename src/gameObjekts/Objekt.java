@@ -28,6 +28,13 @@ public class Objekt {
         this.direc = direc;
     }
 
+    public void setDirecX (int direcX) {
+        this.direc[0] = direcX;
+    }
+    public void setDirecY (int direcY) {
+        this.direc[1] = direcY;
+    }
+
     public int[] getPos () {
         return pos;
     }
