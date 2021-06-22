@@ -10,12 +10,17 @@ public class Ball extends Objekt {
 
 
 
-    protected Circle graphic;
+    protected Circle graphic = new Circle();
 
-    public Ball(Circle graphic) {
+    public Ball(Circle rgraphic) {
 
+        direc[0] = 1;
+        direc[1] = 1;
+        pos[0] = 900;
+        pos[1] = 538;
+        speed = 1;
         playercontrolled = false;
-        graphic = graphic;
+        graphic = rgraphic;
     }
 
     public Circle getGraphic() {

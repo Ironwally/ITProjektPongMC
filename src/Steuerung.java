@@ -9,11 +9,8 @@ import javafx.util.Duration;
 
 public class Steuerung extends Application {
 
-    //Main Klasse
-    PingPongMain ppMain = new PingPongMain();
-
     //Main Timeline
-    private Timeline timeline;
+//    private Timeline timeline;
     private AnimationTimer timer;
 
     //Variable um echte Frame zu speichern
@@ -33,9 +30,9 @@ public class Steuerung extends Application {
 
         //Timeline zum bewegen der Objekte
 
-        timeline = new Timeline(new KeyFrame(Duration.millis(10), e ->run(ppMain)));
-        timeline.setCycleCount(Timeline.INDEFINITE);
-
+//        timeline = new Timeline(new KeyFrame(Duration.millis(5), e ->run(ppMain)));
+//        timeline.setCycleCount(Timeline.INDEFINITE);
+//        timeline.play();
       /*//Actions für spezifische Frames
         timer = new AnimationTimer() {
             @Override
@@ -49,13 +46,19 @@ public class Steuerung extends Application {
 
 
     }
-
+/*
     private void run(PingPongMain ppMain) {
-        ppMain.naechsterGametick();
-    }
 
+        if (ppMain.gameGestartet == true) {
+            System.out.println("game gestartet");
+            ppMain.naechsterGametick();
+        }
+
+    }
+*/
+    /*
     public static void main(String[] args) {
         launch(args);
     }
-
+*/
 }

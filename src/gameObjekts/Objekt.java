@@ -5,9 +5,9 @@ import javafx.scene.shape.*;
 
 public class Objekt {
 
-    protected int[] pos;
+    protected double[] pos = new double[2];
     protected int speed = 0;
-    protected int[] direc;
+    protected double[] direc = new double[2];
     protected boolean playercontrolled;
     protected int radius = 30;
 
@@ -20,26 +20,24 @@ public class Objekt {
     }
 
 
-    public int[] getDirec () {
+    public double[] getDirec () {
         return direc;
     }
 
-    public void setDirec (int[] direc) {
+    public void setDirec (double[] direc) {
         this.direc = direc;
     }
 
-    public void setDirecX (int direcX) {
+    public void setDirecX (double direcX) {
         this.direc[0] = direcX;
     }
-    public void setDirecY (int direcY) {
-        this.direc[1] = direcY;
-    }
+    public void setDirecY (double direcY) { this.direc[1] = direcY; }
 
-    public int[] getPos () {
+    public double[] getPos () {
         return pos;
     }
 
-    public void setPos (int[] pos) {
+    public void setPos (double[] pos) {
         this.pos = pos;
     }
 

@@ -6,9 +6,11 @@ public class Slider extends Objekt{
 
     protected Rectangle graphic;
 
-    public Slider(Rectangle graphic) {
+    public Slider(Rectangle rgraphic, int posX) {
+        pos[0] = posX;
+        pos[1] = 350;
         playercontrolled = true;
-        graphic = graphic;
+        graphic = rgraphic;
     }
 
     public Rectangle getGraphic() {
