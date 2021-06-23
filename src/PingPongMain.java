@@ -11,6 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
@@ -76,9 +77,11 @@ public class PingPongMain implements Initializable {
         if(event.getCode() == KeyCode.KP_UP) {
             sliderListe.get(1).setDirecY(-1);
             sliderListe.get(1).setSpeed(4);
+            System.out.println("UP");
         } else if(event.getCode() == KeyCode.KP_DOWN) {
             sliderListe.get(1).setDirecY(1);
             sliderListe.get(1).setSpeed(4);
+            System.out.println("DOWN");
         }
     }
 
@@ -86,15 +89,13 @@ public class PingPongMain implements Initializable {
     void keyReleased(KeyEvent event) {
 
         if(event.getCode() == KeyCode.W) {
-            System.out.println("released W");
             sliderListe.get(0).setSpeed(0);
         }
         if(event.getCode() == KeyCode.S) {
-            System.out.println("released S");
             sliderListe.get(0).setSpeed(0);
         }
         if(event.getCode() == KeyCode.KP_UP) {
-
+            System.out.println("released");
             sliderListe.get(1).setSpeed(0);
         } else if(event.getCode() == KeyCode.KP_DOWN) {
 
@@ -105,12 +106,19 @@ public class PingPongMain implements Initializable {
     //Spiel starten
     public void gameStarten() {
         gameGestartet = true;
-        ballListe.get(0).setSpeed(2);
+        for (Ball rBall : ballListe) {
+            rBall = resetBall(rBall);
+        }
+        for (Slider rSlider : sliderListe) {
+            rSlider = resetSlider(rSlider);
+        }
     }
 
     public void gameStoppen() {
 
         gameGestartet = false;
+        punkteR = 0;
+        punkteL = 0;
         for (Ball rBall : ballListe) {
             rBall = resetBall(rBall);
         }
@@ -124,14 +132,14 @@ public class PingPongMain implements Initializable {
 
         for (Slider slider : sliderListe) {
 
-            slider.getGraphic().setLayoutX(slider.getPos()[0]);
-            slider.getGraphic().setLayoutY(slider.getPos()[1]);
+            slider.getGraphic().setX(slider.getPos()[0]);
+            slider.getGraphic().setY(slider.getPos()[1]);
         }
 
         for (Ball ball : ballListe) {
 
-            ball.getGraphic().setLayoutX(ball.getPos()[0]);
-            ball.getGraphic().setLayoutY(ball.getPos()[1]);
+            ball.getGraphic().setCenterX(ball.getPos()[0]);
+            ball.getGraphic().setCenterY(ball.getPos()[1]);
         }
 
     }
@@ -139,7 +147,6 @@ public class PingPongMain implements Initializable {
     public void naechsterGametick() {                       //Einmal pro Gametick aufgerufen
 
         if (gameGestartet == true) {
-            System.out.println("gametick");
             moveObjekts();
             updateGrafik();                                     //Nach dem Parameter geändert wurden, werden die Positionen der grafischen Objekte geupdatet
         }
@@ -158,7 +165,6 @@ public class PingPongMain implements Initializable {
 
         for (Ball ball : ballListe) {                                                                                   //Bälle bewegen
 
-            System.out.println("Ball bewegung");
             testHitObjekt(ball);
 
             double[] newPos = new double[2];
@@ -172,23 +178,28 @@ public class PingPongMain implements Initializable {
 
     public Slider resetSlider(Slider rSlider) {
 
+        if (rSlider.getGraphic().getX() < (pane.getPrefWidth()/2)) {
+            newPos[0] = pane.getPrefWidth() / 150;
+        }
+        else {
+            newPos[0] = pane.getPrefWidth()-pane.getPrefWidth()/200;
+        }
+            newPos[1] = pane.getPrefHeight() / 2;
+            rSlider.setPos(newPos);
+            return rSlider;
 
-        newPos[0] = rSlider.getPos()[0];
-        newPos[1] = 350;
-        rSlider.setPos(newPos);
-        return rSlider;
     }
 
     public Ball resetBall(Ball rBall) {
 
         rBall.setSpeed(2);
-        do {
+
             rBall.setDirecX(new Random().nextInt((1 + 2))-1);
-        } while(rBall.getDirec()[0] == 0);
+        if (rBall.getDirec()[0] == 0) rBall.setDirecX(-1);
 
         rBall.setDirecY((Math.random()*((1 + 1))-1));
-        newPos[0] = 900;
-        newPos[1] = 538;
+        newPos[0] = pane.getPrefWidth()/2;
+        newPos[1] = pane.getPrefHeight()/2;
         rBall.setPos(newPos);
         return rBall;
     }
@@ -212,12 +223,13 @@ public class PingPongMain implements Initializable {
             punkteR += 1;
             labelPunkteR.setText(String.valueOf(punkteR));
             resetBall(testBall);
-        } else if (objektRand[4] >= 1920) {                       //Links bekommt einen Punkt, da Ball rechte Wand berührt hat
+        } else if (objektRand[4] >= pane.getPrefWidth()) {                       //Links bekommt einen Punkt, da Ball rechte Wand berührt hat
             punkteL += 1;
             labelPunkteL.setText(String.valueOf(punkteL));
             resetBall(testBall);
-        } else if (objektRand[3] <= 0 || objektRand[7] >= 1080) { //Ball trifft Decke, oder Boden, Ball prallt ab
+        } else if (objektRand[3] <= 0 || objektRand[7] >= pane.getPrefHeight()) { //Ball trifft Decke, oder Boden, Ball prallt ab
             //querschleger
+            testBall.setSpeed(testBall.getSpeed()+2);
             testBall.setDirecY(testBall.getDirec()[1] * (-1));
         }
 
@@ -236,8 +248,11 @@ public class PingPongMain implements Initializable {
                     } else if (i == 2 || i == 6) {
                         testBall.setDirecY(testBall.getDirec()[1] * (-1));
                     }
+                    testBall.setSpeed(testBall.getSpeed()+1);
                     break;
+
                 }
+
             }
             if (posTest) break;
         }

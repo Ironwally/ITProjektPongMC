@@ -6,13 +6,13 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PingPongMain">
+<BorderPane fx:id="pane" maxHeight="1080.0" maxWidth="1920.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PingPongMain">
    <center>
-      <Pane prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-color: black;" BorderPane.alignment="CENTER">
+      <Pane maxHeight="1080.0" maxWidth="1920.0" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: black;" BorderPane.alignment="CENTER">
          <children>
-            <Circle fx:id="graphicball1" fill="WHITE" layoutX="900.0" layoutY="538.0" radius="30.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" />
-            <Rectangle fx:id="graphicSliderRight" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="370.0" layoutX="1856.0" layoutY="350.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" width="50.0" />
-            <Rectangle fx:id="graphicSliderLeft" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="370.0" layoutX="14.0" layoutY="350.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" width="50.0" />
+            <Circle fx:id="graphicball1" centerX="900.0" centerY="538.0" fill="WHITE" radius="30.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" />
+            <Rectangle fx:id="graphicSliderRight" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="370.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" width="50.0" x="1856.0" y="350.0" />
+            <Rectangle fx:id="graphicSliderLeft" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="370.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" width="50.0" x="14.0" y="350.0" />
          </children>
       </Pane>
    </center>
