@@ -9,7 +9,7 @@ public class Objekt {
     protected int speed = 0;
     protected double[] direc = new double[2];
     protected boolean playercontrolled;
-    protected int radius = 30;
+    protected int radius;
 
     public int getRadius() {
         return radius;

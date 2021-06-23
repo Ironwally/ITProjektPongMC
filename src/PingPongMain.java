@@ -44,7 +44,7 @@ public class PingPongMain implements Initializable {
     @FXML
     private Circle graphicball1;
     @FXML
-    private BorderPane bPane;
+    private Pane pane;
     @FXML
     private Label labelPunkteL;
     @FXML
@@ -63,16 +63,22 @@ public class PingPongMain implements Initializable {
     //Methoden
     //movement updaten
     @FXML
-    void keyPressed(KeyEvent event) {
+    void keyPressed(KeyEvent event) {                       //Tastendruck registrieren und slider verschieben
         if(event.getCode() == KeyCode.W) {
         //    System.out.println("W");
+            sliderListe.get(0).setDirecY(-1);
+            sliderListe.get(0).setSpeed(4);
+        } else if(event.getCode() == KeyCode.S) {
+
             sliderListe.get(0).setDirecY(1);
             sliderListe.get(0).setSpeed(4);
         }
-        if(event.getCode() == KeyCode.S) {
-
-            sliderListe.get(0).setDirecY(-1);
-            sliderListe.get(0).setSpeed(4);
+        if(event.getCode() == KeyCode.KP_UP) {
+            sliderListe.get(1).setDirecY(-1);
+            sliderListe.get(1).setSpeed(4);
+        } else if(event.getCode() == KeyCode.KP_DOWN) {
+            sliderListe.get(1).setDirecY(1);
+            sliderListe.get(1).setSpeed(4);
         }
     }
 
@@ -81,27 +87,36 @@ public class PingPongMain implements Initializable {
 
         if(event.getCode() == KeyCode.W) {
             System.out.println("released W");
-        //    sliderListe.get(0).setDirecY(1);
-        //    sliderListe.get(0).setSpeed(4);
+            sliderListe.get(0).setSpeed(0);
         }
         if(event.getCode() == KeyCode.S) {
             System.out.println("released S");
-        //    sliderListe.get(0).setDirecY(-1);
-        //    sliderListe.get(0).setSpeed(4);
+            sliderListe.get(0).setSpeed(0);
+        }
+        if(event.getCode() == KeyCode.KP_UP) {
+
+            sliderListe.get(1).setSpeed(0);
+        } else if(event.getCode() == KeyCode.KP_DOWN) {
+
+            sliderListe.get(1).setSpeed(0);
         }
     }
 
     //Spiel starten
     public void gameStarten() {
         gameGestartet = true;
-        ballListe.get(0).setSpeed(5);
+        ballListe.get(0).setSpeed(2);
     }
 
     public void gameStoppen() {
 
         gameGestartet = false;
-        for (Ball ball : ballListe) resetBall(ball);
-        for (Slider slider : sliderListe) resetSlider(slider);
+        for (Ball rBall : ballListe) {
+            rBall = resetBall(rBall);
+        }
+        for (Slider rSlider : sliderListe) {
+            rSlider = resetSlider(rSlider);
+        }
         updateGrafik();
     }
 
@@ -136,8 +151,9 @@ public class PingPongMain implements Initializable {
             double[] newPos = new double[2];
             newPos[0] = slider.getPos()[0];
             newPos[1] = slider.getPos()[1] + slider.getDirec()[1] * slider.getSpeed();
-            slider.setPos(newPos);
-
+            if ((slider.getPos()[1] + (slider.getGraphic().getHeight() / 2)) < pane.getPrefHeight() || (slider.getPos()[1] - (slider.getGraphic().getHeight() / 2)) > pane.getPrefHeight()) {
+                slider.setPos(newPos);
+            }
         }
 
         for (Ball ball : ballListe) {                                                                                   //Bälle bewegen
@@ -154,24 +170,27 @@ public class PingPongMain implements Initializable {
 
     }
 
-    public void resetSlider(Slider slider) {
-        newPos[0] = slider.getPos()[0];
+    public Slider resetSlider(Slider rSlider) {
+
+
+        newPos[0] = rSlider.getPos()[0];
         newPos[1] = 350;
-        slider.setPos(newPos);
+        rSlider.setPos(newPos);
+        return rSlider;
     }
 
-    public void resetBall(Ball ball) {
+    public Ball resetBall(Ball rBall) {
 
-        ball.setSpeed(1);
+        rBall.setSpeed(2);
         do {
-            ball.setDirecX(new Random().nextInt((1 + 2))-1);
-        } while(ball.getDirec()[0] == 0);
+            rBall.setDirecX(new Random().nextInt((1 + 2))-1);
+        } while(rBall.getDirec()[0] == 0);
 
-        ball.setDirecY((Math.random()*((1 + 1))-1));
+        rBall.setDirecY((Math.random()*((1 + 1))-1));
         newPos[0] = 900;
         newPos[1] = 538;
-        ball.setPos(newPos);
-
+        rBall.setPos(newPos);
+        return rBall;
     }
 
     public void testHitObjekt(Ball testBall) {
@@ -189,15 +208,15 @@ public class PingPongMain implements Initializable {
         objektRand[6] = testBall.getPos()[0];                     // Ball Aufschlagpunkte auf der x-Koordinate, oben
         objektRand[7] = testBall.getPos()[1] + testBall.getRadius(); // Ball Aufschlagpunkte auf der y-Koordinate, oben
 
-        if (objektRand[0] == 0) {                                 //Rechts bekommt einen Punkt, da Ball linke Wand berührt hat
+        if (objektRand[0] <= 0) {                                 //Rechts bekommt einen Punkt, da Ball linke Wand berührt hat
             punkteR += 1;
             labelPunkteR.setText(String.valueOf(punkteR));
             resetBall(testBall);
-        } else if (objektRand[4] == 1920) {                       //Links bekommt einen Punkt, da Ball rechte Wand berührt hat
+        } else if (objektRand[4] >= 1920) {                       //Links bekommt einen Punkt, da Ball rechte Wand berührt hat
             punkteL += 1;
             labelPunkteL.setText(String.valueOf(punkteL));
             resetBall(testBall);
-        } else if (objektRand[3] == 0 || objektRand[7] == 1080) { //Ball trifft Decke, oder Boden, Ball prallt ab
+        } else if (objektRand[3] <= 0 || objektRand[7] >= 1080) { //Ball trifft Decke, oder Boden, Ball prallt ab
             //querschleger
             testBall.setDirecY(testBall.getDirec()[1] * (-1));
         }

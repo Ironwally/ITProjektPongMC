@@ -19,6 +19,7 @@ public class Ball extends Objekt {
         pos[0] = 900;
         pos[1] = 538;
         speed = 1;
+        radius = 30;
         playercontrolled = false;
         graphic = rgraphic;
     }
