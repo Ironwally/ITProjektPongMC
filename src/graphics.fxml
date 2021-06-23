@@ -6,9 +6,9 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane fx:id="pane" maxHeight="1080.0" maxWidth="1920.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PingPongMain">
+<BorderPane fx:id="pane" maxHeight="1080.0" maxWidth="1920.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PingPongMain">
    <center>
-      <Pane maxHeight="1080.0" maxWidth="1920.0" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: black;" BorderPane.alignment="CENTER">
+      <Pane maxHeight="1080.0" maxWidth="1920.0" minHeight="720.0" minWidth="1280.0" prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-color: black;" BorderPane.alignment="CENTER">
          <children>
             <Circle fx:id="graphicball1" centerX="900.0" centerY="538.0" fill="WHITE" radius="30.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" />
             <Rectangle fx:id="graphicSliderRight" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="370.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" width="50.0" x="1856.0" y="350.0" />
@@ -30,7 +30,7 @@
             <VBox prefHeight="200.0" prefWidth="100.0">
                <children>
                   <Label prefWidth="102.0" text="Punkte Links" />
-                  <Label fx:id="labelPunkteL" alignment="CENTER" prefHeight="100.0" prefWidth="150.0" text="Links" textAlignment="CENTER">
+                  <Label fx:id="labelPunkteL" alignment="CENTER" prefHeight="100.0" prefWidth="150.0" text="0" textAlignment="CENTER">
                      <font>
                         <Font size="30.0" />
                      </font>
@@ -40,7 +40,7 @@
             <VBox prefHeight="200.0" prefWidth="100.0">
                <children>
                   <Label prefHeight="17.0" prefWidth="99.0" text="Punkte Rechts" />
-                  <Label fx:id="labelPunkteR" alignment="CENTER" prefHeight="100.0" prefWidth="150.0" text="Rechts" textAlignment="CENTER">
+                  <Label fx:id="labelPunkteR" alignment="CENTER" prefHeight="100.0" prefWidth="150.0" text="0" textAlignment="CENTER">
                      <font>
                         <Font size="30.0" />
                      </font>

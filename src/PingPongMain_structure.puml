@@ -1,0 +1,187 @@
+@startuml
+
+/' diagram meta data start
+config=StructureConfiguration;
+{
+  "projectClassification": {
+    "searchMode": "OpenProject", // OpenProject, AllProjects
+    "includedProjects": "",
+    "pathEndKeywords": "*.impl",
+    "isClientPath": "",
+    "isClientName": "",
+    "isTestPath": "",
+    "isTestName": "",
+    "isMappingPath": "",
+    "isMappingName": "",
+    "isDataAccessPath": "",
+    "isDataAccessName": "",
+    "isDataStructurePath": "",
+    "isDataStructureName": "",
+    "isInterfaceStructuresPath": "",
+    "isInterfaceStructuresName": "",
+    "isEntryPointPath": "",
+    "isEntryPointName": ""
+  },
+  "graphRestriction": {
+    "classPackageExcludeFilter": "",
+    "classPackageIncludeFilter": "",
+    "classNameExcludeFilter": "",
+    "classNameIncludeFilter": "",
+    "methodNameExcludeFilter": "",
+    "methodNameIncludeFilter": "",
+    "removeByInheritance": "", // inheritance/annotation based filtering is done in a second step
+    "removeByAnnotation": "",
+    "removeByClassPackage": "", // cleanup the graph after inheritance/annotation based filtering is done
+    "removeByClassName": "",
+    "cutMappings": false,
+    "cutEnum": true,
+    "cutTests": true,
+    "cutClient": true,
+    "cutDataAccess": false,
+    "cutInterfaceStructures": false,
+    "cutDataStructures": false,
+    "cutGetterAndSetter": true,
+    "cutConstructors": true
+  },
+  "graphTraversal": {
+    "forwardDepth": 6,
+    "backwardDepth": 6,
+    "classPackageExcludeFilter": "",
+    "classPackageIncludeFilter": "",
+    "classNameExcludeFilter": "",
+    "classNameIncludeFilter": "",
+    "methodNameExcludeFilter": "",
+    "methodNameIncludeFilter": "",
+    "hideMappings": false,
+    "hideDataStructures": false,
+    "hidePrivateMethods": true,
+    "hideInterfaceCalls": true, // indirection: implementation -> interface (is hidden) -> implementation
+    "onlyShowApplicationEntryPoints": false // root node is included
+  },
+  "details": {
+    "aggregation": "GroupByClass", // ByClass, GroupByClass, None
+    "showClassGenericTypes": true,
+    "showMethods": true,
+    "showMethodParameterNames": true,
+    "showMethodParameterTypes": true,
+    "showMethodReturnType": true,
+    "showPackageLevels": 2,
+    "showDetailedClassStructure": true
+  },
+  "rootClass": "PingPongMain"
+}
+diagram meta data end '/
+
+
+
+digraph g {
+    rankdir="TB"
+    splines=polyline
+    
+
+'nodes 
+subgraph cluster_1075772803 { 
+   	label=PingPongMain
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   PingPongMain1075772803[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)PingPongMain</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >#   ballListe: List&lt;Ball&gt; [0..*]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   gameGestartet: boolean [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   graphicSliderLeft: Rectangle [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   graphicSliderRight: Rectangle [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   graphicball1: Circle [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   labelPunkteL: Label [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   labelPunkteR: Label [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   newPos: double[] [0..*]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   objektListe: List&lt;Objekt&gt; [0..*]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   objektRand: double[] [0..*]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   pane: Pane [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   punkteL: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   punkteR: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   rectangleList: List&lt;Rectangle&gt; [0..*]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   sliderListe: List&lt;Slider&gt; [0..*]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   timeline: Timeline [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ gameStarten()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ gameStoppen()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ initialize(location: URL, resources: ResourceBundle)</TD></TR>
+<TR><TD ALIGN="LEFT" ># keyPressed(event: KeyEvent)</TD></TR>
+<TR><TD ALIGN="LEFT" ># keyReleased(event: KeyEvent)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ moveObjekts()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ naechsterGametick()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ resetBall(rBall: Ball): Ball</TD></TR>
+<TR><TD ALIGN="LEFT" >+ resetSlider(rSlider: Slider): Slider</TD></TR>
+<TR><TD ALIGN="LEFT" >+ testHitObjekt(testBall: Ball)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ updateGrafik()</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+} 
+
+subgraph cluster_1793180982 { 
+   	label=gameObjekts
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   Ball1793180982[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Ball</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >#   graphic: Circle [0..1]</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+Objekt1793180982[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Objekt</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >#   direc: double[] [0..*]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   playercontrolled: boolean [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   pos: double[] [0..*]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   radius: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   speed: int [1]</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+Slider1793180982[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Slider</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >#   graphic: Rectangle [0..1]</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+} 
+
+'edges    
+Objekt1793180982 -> Ball1793180982[arrowhead=none, arrowtail=empty, dir=both];
+Objekt1793180982 -> Slider1793180982[arrowhead=none, arrowtail=empty, dir=both];
+PingPongMain1075772803 -> Ball1793180982[label="ballListe
+[0..*]"];
+PingPongMain1075772803 -> Objekt1793180982[label="objektListe
+[0..*]"];
+PingPongMain1075772803 -> Slider1793180982[label="sliderListe
+[0..*]"];
+    
+}
+@enduml

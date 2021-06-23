@@ -10,7 +10,7 @@ public class Ball extends Objekt {
 
 
 
-    protected Circle graphic = new Circle();
+    protected Circle graphic;
 
     public Ball(Circle rgraphic) {
 

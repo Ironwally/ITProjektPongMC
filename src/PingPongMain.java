@@ -64,7 +64,7 @@ public class PingPongMain implements Initializable {
     //Methoden
     //movement updaten
     @FXML
-    void keyPressed(KeyEvent event) {                       //Tastendruck registrieren und slider verschieben
+    void keyPressed(KeyEvent event) {                       //Tastendruck registrieren und Slider verschieben
         if(event.getCode() == KeyCode.W) {
         //    System.out.println("W");
             sliderListe.get(0).setDirecY(-1);
@@ -74,11 +74,11 @@ public class PingPongMain implements Initializable {
             sliderListe.get(0).setDirecY(1);
             sliderListe.get(0).setSpeed(4);
         }
-        if(event.getCode() == KeyCode.KP_UP) {
+        if(event.getCode() == KeyCode.UP) {
             sliderListe.get(1).setDirecY(-1);
             sliderListe.get(1).setSpeed(4);
             System.out.println("UP");
-        } else if(event.getCode() == KeyCode.KP_DOWN) {
+        } else if(event.getCode() == KeyCode.DOWN) {
             sliderListe.get(1).setDirecY(1);
             sliderListe.get(1).setSpeed(4);
             System.out.println("DOWN");
@@ -86,7 +86,7 @@ public class PingPongMain implements Initializable {
     }
 
     @FXML
-    void keyReleased(KeyEvent event) {
+    void keyReleased(KeyEvent event) {                      //Taste wird losgelassen und Slider angehalten
 
         if(event.getCode() == KeyCode.W) {
             sliderListe.get(0).setSpeed(0);
@@ -94,10 +94,10 @@ public class PingPongMain implements Initializable {
         if(event.getCode() == KeyCode.S) {
             sliderListe.get(0).setSpeed(0);
         }
-        if(event.getCode() == KeyCode.KP_UP) {
+        if(event.getCode() == KeyCode.UP) {
             System.out.println("released");
             sliderListe.get(1).setSpeed(0);
-        } else if(event.getCode() == KeyCode.KP_DOWN) {
+        } else if(event.getCode() == KeyCode.DOWN) {
 
             sliderListe.get(1).setSpeed(0);
         }
@@ -106,24 +106,29 @@ public class PingPongMain implements Initializable {
     //Spiel starten
     public void gameStarten() {
         gameGestartet = true;
-        for (Ball rBall : ballListe) {
-            rBall = resetBall(rBall);
+        /*
+        for (int i=0;i<ballListe.size();i++) {
+            ballListe.set(i, resetBall(ballListe.get(i)));
+
         }
-        for (Slider rSlider : sliderListe) {
-            rSlider = resetSlider(rSlider);
+        for (int i=0;i<sliderListe.size();i++) {
+            sliderListe.set(i, resetSlider(sliderListe.get(i)));
         }
+        */
     }
+
 
     public void gameStoppen() {
 
         gameGestartet = false;
         punkteR = 0;
         punkteL = 0;
-        for (Ball rBall : ballListe) {
-            rBall = resetBall(rBall);
+        for (int i=0;i<ballListe.size();i++) {
+            ballListe.set(i, resetBall(ballListe.get(i)));
+
         }
-        for (Slider rSlider : sliderListe) {
-            rSlider = resetSlider(rSlider);
+        for (int i=0;i<sliderListe.size();i++) {
+            sliderListe.set(i, resetSlider(sliderListe.get(i)));
         }
         updateGrafik();
     }
@@ -151,6 +156,7 @@ public class PingPongMain implements Initializable {
             updateGrafik();                                     //Nach dem Parameter geändert wurden, werden die Positionen der grafischen Objekte geupdatet
         }
     }
+
     public void moveObjekts() {                                                                                         //Alle Objekte Position verändern
 
         for (Slider slider : sliderListe) {                                                                             //Slider bewegen
@@ -158,7 +164,7 @@ public class PingPongMain implements Initializable {
             double[] newPos = new double[2];
             newPos[0] = slider.getPos()[0];
             newPos[1] = slider.getPos()[1] + slider.getDirec()[1] * slider.getSpeed();
-            if ((slider.getPos()[1] + (slider.getGraphic().getHeight() / 2)) < pane.getPrefHeight() || (slider.getPos()[1] - (slider.getGraphic().getHeight() / 2)) > pane.getPrefHeight()) {
+            if ((slider.getPos()[1] + (slider.getGraphic().getHeight() / 2)) < pane.getHeight() || (slider.getPos()[1] - (slider.getGraphic().getHeight() / 2)) > pane.getHeight()) {
                 slider.setPos(newPos);
             }
         }
@@ -178,13 +184,13 @@ public class PingPongMain implements Initializable {
 
     public Slider resetSlider(Slider rSlider) {
 
-        if (rSlider.getGraphic().getX() < (pane.getPrefWidth()/2)) {
-            newPos[0] = pane.getPrefWidth() / 150;
+        if (rSlider.getGraphic().getX() < (pane.getWidth()/2)) {
+            newPos[0] = pane.getWidth() / 150;
         }
         else {
-            newPos[0] = pane.getPrefWidth()-pane.getPrefWidth()/200;
+            newPos[0] = pane.getWidth()-pane.getWidth()/150;
         }
-            newPos[1] = pane.getPrefHeight() / 2;
+            newPos[1] = pane.getHeight() / 2;
             rSlider.setPos(newPos);
             return rSlider;
 
@@ -198,8 +204,8 @@ public class PingPongMain implements Initializable {
         if (rBall.getDirec()[0] == 0) rBall.setDirecX(-1);
 
         rBall.setDirecY((Math.random()*((1 + 1))-1));
-        newPos[0] = pane.getPrefWidth()/2;
-        newPos[1] = pane.getPrefHeight()/2;
+        newPos[0] = pane.getWidth()/2;
+        newPos[1] = pane.getHeight()/2;
         rBall.setPos(newPos);
         return rBall;
     }
@@ -223,13 +229,12 @@ public class PingPongMain implements Initializable {
             punkteR += 1;
             labelPunkteR.setText(String.valueOf(punkteR));
             resetBall(testBall);
-        } else if (objektRand[4] >= pane.getPrefWidth()) {                       //Links bekommt einen Punkt, da Ball rechte Wand berührt hat
+        } else if (objektRand[4] >= pane.getWidth()) {                       //Links bekommt einen Punkt, da Ball rechte Wand berührt hat
             punkteL += 1;
             labelPunkteL.setText(String.valueOf(punkteL));
             resetBall(testBall);
-        } else if (objektRand[3] <= 0 || objektRand[7] >= pane.getPrefHeight()) { //Ball trifft Decke, oder Boden, Ball prallt ab
+        } else if (objektRand[3] <= 0 || objektRand[7] >= pane.getHeight()) { //Ball trifft Decke, oder Boden, Ball prallt ab
             //querschleger
-            testBall.setSpeed(testBall.getSpeed()+2);
             testBall.setDirecY(testBall.getDirec()[1] * (-1));
         }
 

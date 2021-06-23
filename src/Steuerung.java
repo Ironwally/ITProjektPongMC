@@ -11,10 +11,10 @@ public class Steuerung extends Application {
 
     //Main Timeline
 //    private Timeline timeline;
-    private AnimationTimer timer;
+//    private AnimationTimer timer;
 
     //Variable um echte Frame zu speichern
-    private Integer i=0;
+//    private Integer i=0;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
